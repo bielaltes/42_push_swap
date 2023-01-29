@@ -1,6 +1,6 @@
 CC=gcc
 NAME=push_swap
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -g
 LIB_DIR=libft/
 LIB=libft.a
 LIB_INC=libft.h
@@ -9,7 +9,8 @@ INC = INC/push_swap.h
 SRC =	SRC/moves1.c		\
 		SRC/parse.c			\
 		SRC/push_swap.c		\
-		SRC/stack.c			
+		SRC/stack.c			\
+		SRC/algorithm.c
 		
 SRC_BNS =
 

@@ -6,12 +6,32 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:48:13 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/28 18:59:53 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/01/29 09:17:12 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INC/push_swap.h"
 #include "../libft/libft.h"
+
+static int	check_repeated(int argc, char **argv)
+{
+	int	i;
+	int j;
+
+	i = 1;
+	while (i < argc)
+	{
+		j = 1;
+		while (j < argc)
+		{
+			if (i != j && ft_atoi(argv[i]) == ft_atoi(argv[j]))
+				return (0);
+			++j;
+		}
+		++i;
+	}
+	return (1);
+}
 
 static int	check_numbers(char *str)
 {
@@ -36,5 +56,5 @@ int	parse(int argc, char **argv)
 		if (size == 10 && ft_strncmp(argv[i], "2147483647", 10) > 0)
 			return (0);
 	}
-	return (1);
+	return (check_repeated(argc, argv));
 }

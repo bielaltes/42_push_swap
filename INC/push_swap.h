@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:12:22 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/28 18:21:06 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/01/29 13:18:39 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 
+# define RA 1
+# define RRA 2
 typedef struct s_node
 {
 	int				content;
@@ -45,6 +47,9 @@ void	revvrrotate(t_stack *s1, t_stack *s2);
 void	init_stack(t_stack *stack);
 void	push_top(t_stack *stack, int num);
 void	pop(t_stack *stack);
+int		min_stack(t_stack *stack);
+int		max_stack(t_stack *stack);
 void 	print_stack(t_stack *stack);
+void	sort(t_stack *a, t_stack *b);
 
 #endif
