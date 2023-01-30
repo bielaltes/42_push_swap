@@ -33,7 +33,7 @@ else
 	exit 0
 fi
 
-if [ $1 == -v ];then
+if [[ $1 = -v ]];then
 if [ -z "$2" ];then
 	n=500;
 else
@@ -43,7 +43,7 @@ ARG=$(ruby -e "puts (0..($n)).to_a.shuffle.join(' ')"); ./push_swap $ARG | ./pro
 exit 0
 fi
 
-if [ $1 == -v2 ];then
+if [[ $1 = -v2 ]];then
 ARG=$2; ./push_swap $ARG | ./pro_checker $ARG
 exit 0
 fi
@@ -3248,7 +3248,7 @@ while [ $cont -lt $val ]
 do
 ARG=$(ruby -e "puts (-250..249).to_a.shuffle.join(' ')");
 S=$(./push_swap $ARG | ./checker_OS $ARG)
-if [ $S == "OK" ]; then
+if [[ $S == "OK" ]]; then
 	printf "${GREEN}$cont .[OK]${DEF_COLOR}";
 	control=2
 else

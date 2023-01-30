@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:48:13 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/29 09:17:12 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/01/30 11:44:24 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	check_numbers(char *str)
 
 	while (str[i] != '\0')
 	{
-		if (!ft_isdigit(str[i]))
+		if (!ft_isdigit(str[i]) && (i != 0 || str[i] != '-'))
 			return (0);
 		++i;
 	}
