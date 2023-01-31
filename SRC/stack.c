@@ -6,18 +6,19 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:49:31 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/30 10:58:49 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:50:59 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INC/push_swap.h"
 #include "../libft/libft.h"
 
-void	init_stack(t_stack *stack)
+void	init_stack(t_stack *stack, char name)
 {
 	stack->top = NULL;
 	stack->bot = NULL;
 	stack->size = 0;
+	stack->name = name;
 }
 
 void	push_top(t_stack *stack, int num)
@@ -104,6 +105,25 @@ int	max_stack(t_stack *stack)
 	if (aux->content > max)
 			max = aux->content;
 	return (max);
+}
+
+int	sorted(t_stack *a, int n)
+{
+	int		i;
+	t_node	*aux;
+
+	if (a->size <= 1)
+		return (1);
+	i = 2;
+	aux = a->top->ant;
+	while (aux != a->top && i <= n)
+	{
+		if (aux->content < aux->next->content)
+			return (0);
+		aux = aux->ant;
+		++i;
+	}
+	return (1);
 }
 
 void print_stack(t_stack *stack)

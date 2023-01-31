@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 10:07:36 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/30 13:42:35 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:17:39 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,14 @@ int	smart_rot(t_stack *a, int min, int max)
 	sum = 1;
 	while (aux && aux != a->bot && !found)
 	{
-		if (aux->content > min && aux->content <= max)
+		if (aux->content >= min && aux->content <= max)
 			found = sum;
 		aux = aux->ant;
 		++sum;
 	}
 	if (aux && !found)
 	{
-		if (aux->content > min && aux->content <= max)
+		if (aux->content >= min && aux->content <= max)
 			found = sum;
 	}
 	if (!found)
@@ -103,7 +103,7 @@ int	smart_rot(t_stack *a, int min, int max)
 	sum = 1;
 	while (aux != a->top && sum < found)
 	{
-		if (aux->content > min && aux->content <= max)
+		if (aux->content >= min && aux->content <= max)
 			return (RRA);
 		aux = aux->next;
 		++sum;
@@ -127,10 +127,8 @@ void	send_b(t_stack *a, t_stack *b, int max, int min)
 			while (!(a->top->content <= max && a->top->content >= min))
 			{
 				rotate(a);
-				ft_printf("ra\n");
 			}
 			push(b, a);
-			ft_printf("pb\n");
 		}
 		else if (end == RRA)
 		{
@@ -138,10 +136,8 @@ void	send_b(t_stack *a, t_stack *b, int max, int min)
 			while (!(a->top->content <= max && a->top->content >= min))
 			{
 				revrotate(a);
-				ft_printf("rra\n");
 			}
 			push(b, a);
-			ft_printf("pb\n");
 		}
 	}
 }
@@ -154,58 +150,27 @@ void get_back(t_stack *a, t_stack *b)
 	{
 		max = max_stack(b);
 		//ft_printf("max:%d", max);
-		rot = smart_rot(b, max-1, max);
+		rot = smart_rot(b, max, max);
 		if (rot == RA)
 		{
 			while (b->top->content != max)
 			{
 				rotate(b);
-				ft_printf("rb\n");
 			}
 			push(a, b);
-			ft_printf("pa\n");
 		}
 		else if (rot == RRA)
 		{
 			while (b->top->content != max)
 			{
 				revrotate(b);
-				ft_printf("rrb\n");
 			}
 			push(a, b);
-			ft_printf("pa\n");
 		}
 	}
 }
 
-void sort3(t_stack *a)
-{
-	int *n;
 
-	n = malloc(sizeof(int) * (a->size + 1));
-	fill_array(n, a);
-	if (a->size == 2)
-	{
-		if (n[1] > n[0])
-			ft_printf("sa\n");
-	}
-	else if (n[0] < n[1] && n[0] < n[2] && n[1] > n[2])
-	{
-		ft_printf("rra\n");
-		ft_printf("sa\n");
-	}
-	else if (n[0] > n[1] && n[0] < n[2] && n[1] < n[2])
-		ft_printf("sa\n");
-	else if (n[0] < n[1] && n[0] > n[2] && n[1] > n[2])
-		ft_printf("rra\n");
-	else if (n[1] < n[2] && n[0] > n[1] && n[0] > n[2])
-		ft_printf("ra\n");
-	else if (n[1] > n[2] && n[0] > n[1] && n[0] > n[2])
-	{
-		ft_printf("ra\n");
-		ft_printf("sa\n");
-	}
-}
 
 void	sort(t_stack *a, t_stack *b)
 {
@@ -216,6 +181,10 @@ void	sort(t_stack *a, t_stack *b)
 
 	if (a->size <= 3)
 		return (sort3(a));
+	else if(a->size == 4)
+		return (sort4(a, b));
+	else if (a->size == 5)
+		return (sort5(a, b));
 	chunk_size = a->size * 0.015 + 3.5;
 	if (chunk_size < 4)
 		chunk_size = 2;

@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:48:13 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/30 11:44:24 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/01/31 11:46:51 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int	check_numbers(char *str)
 	{
 		if (!ft_isdigit(str[i]) && (i != 0 || str[i] != '-'))
 			return (0);
+		else if (str[0] == '-' && ft_strlen(str) == 1)
+			return (0);
 		++i;
 	}
 	return (i);
@@ -51,10 +53,13 @@ int	parse(int argc, char **argv)
 	for (int i = 1;  i < argc; ++i)
 	{
 		int size = check_numbers(argv[i]);
-		if (size == 0 || size > 10)
+		if (size == 0 || (size > 10 && argv[i][0] != '-') || size > 11)
 			return (0);
-		if (size == 10 && ft_strncmp(argv[i], "2147483647", 10) > 0)
+		if (argv[i][0] != '-' && size == 10 && ft_strncmp(argv[i], "2147483647", 10) > 0)
 			return (0);
+		if (argv[i][0] == '-' && size == 11 && ft_strncmp(argv[i], "-2147483648", 11) > 0)
+			return (0);
+			
 	}
 	return (check_repeated(argc, argv));
 }

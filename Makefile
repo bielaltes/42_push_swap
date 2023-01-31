@@ -10,7 +10,8 @@ SRC =	SRC/moves1.c		\
 		SRC/parse.c			\
 		SRC/push_swap.c		\
 		SRC/stack.c			\
-		SRC/algorithm.c
+		SRC/algorithm.c		\
+		SRC/fast_sort.c
 		
 SRC_BNS =
 

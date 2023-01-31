@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:42:59 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/30 12:19:01 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:11:32 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ int main(int argc, char **argv)
 	t_stack a;
 	t_stack b;
 	if (!parse(argc, argv) || argc ==1)
-		ft_printf("Error\n");
+		write(2, "Error\n", 6);
 	else
 	{
-		init_stack(&a);
-		init_stack(&b);
+		init_stack(&a, 'a');
+		init_stack(&b, 'b');
 		//print_stack(&a);
 		for (int i = argc-1; i > 0; --i)
 			push_top(&a, atoi(argv[i]));
 		sort(&a, &b);
-		print_stack(&a);
+		//print_stack(&a);
 	}
 }

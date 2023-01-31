@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:12:22 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/29 13:18:39 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:35:16 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_stack
 	struct s_node	*top;
 	struct s_node	*bot;
 	int				size;
+	char			name;
 }					t_stack;
 
 int		parse(int argc, char **argv);
@@ -44,12 +45,18 @@ void	rotate(t_stack *s);
 void	rrotate(t_stack *s1, t_stack *s2);
 void	revrotate(t_stack *s);
 void	revvrrotate(t_stack *s1, t_stack *s2);
-void	init_stack(t_stack *stack);
+void	init_stack(t_stack *stack, char c);
 void	push_top(t_stack *stack, int num);
 void	pop(t_stack *stack);
 int		min_stack(t_stack *stack);
 int		max_stack(t_stack *stack);
 void 	print_stack(t_stack *stack);
 void	sort(t_stack *a, t_stack *b);
+void	sort3(t_stack *a);
+void	sort4(t_stack *a, t_stack *b);
+void	sort5(t_stack *a, t_stack *b);
+void	fill_array(int *n, t_stack*a);
+int		smart_rot(t_stack *a, int min, int max);
+int		sorted(t_stack *a, int n);
 
 #endif
