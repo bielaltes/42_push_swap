@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 10:07:36 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/31 13:17:39 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:00:41 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,30 +142,58 @@ void	send_b(t_stack *a, t_stack *b, int max, int min)
 	}
 }
 
+static int	in_3(int n, int *max)
+{
+	if (n == max[0])
+		return (1);
+	if (n == max[1])
+		return (1);
+	//if (n == max[2])
+		//return (1);
+	return (0);
+}
+
 void get_back(t_stack *a, t_stack *b)
 {
 	int rot;
-	int	max;
+	int	*max;
+
 	while (b->size != 0)
 	{
-		max = max_stack(b);
-		//ft_printf("max:%d", max);
-		rot = smart_rot(b, max, max);
-		if (rot == RA)
+		//print_stack(a);
+		//print_stack(b);
+		//ft_printf("\n");
+		if (b->size <= 2)
 		{
-			while (b->top->content != max)
-			{
-				rotate(b);
-			}
-			push(a, b);
+			while (b->size != 0)
+				push(a, b);
+			sort2(a);
 		}
-		else if (rot == RRA)
+		else
 		{
-			while (b->top->content != max)
+			max = max3_stack(b);
+			//ft_printf("max:%d %d", max[2], max[0]);
+			while ((rot = smart_rot(b, max[1], max[0])) != 0)
 			{
-				revrotate(b);
+				if (rot == RA)
+				{
+					while (!in_3(b->top->content, max))
+					{
+						rotate(b);
+					}
+					push(a, b);
+				}
+				else if (rot == RRA)
+				{
+					while (!in_3(b->top->content, max))
+					{
+						revrotate(b);
+					}
+					push(a, b);
+				}
 			}
-			push(a, b);
+			free(max);
+			sort2(a);
 		}
 	}
 }
@@ -179,7 +207,9 @@ void	sort(t_stack *a, t_stack *b)
 	int *delimiters;
 	int number_chunks;
 
-	if (a->size <= 3)
+	if (a->size == 2)
+		return (sort2(a));
+	else if (a->size == 3)
 		return (sort3(a));
 	else if(a->size == 4)
 		return (sort4(a, b));

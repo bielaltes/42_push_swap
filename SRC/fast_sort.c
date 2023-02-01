@@ -6,24 +6,27 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 13:27:52 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/31 13:10:04 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:00:09 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INC/push_swap.h"
 #include "../libft/libft.h"
 
+void	sort2(t_stack *a)
+{
+	if (a->size >= 2)
+	{
+		if (a->top->content > a->top->ant->content)
+			swap(a);
+	}
+}
 void	sort3(t_stack *a)
 {
 	int *n;
 
 	n = malloc(sizeof(int) * (a->size + 1));
 	fill_array(n, a);
-	if (a->size == 2)
-	{
-		if (n[1] > n[0])
-			swap(a);
-	}
 	if (sorted(a, 3))
 		return ;
 	if (n[0] < n[1] && n[0] < n[2] && n[1] > n[2])

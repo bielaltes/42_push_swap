@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:48:13 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/31 11:46:51 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/01 11:30:49 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ int	parse(int argc, char **argv)
 	for (int i = 1;  i < argc; ++i)
 	{
 		int size = check_numbers(argv[i]);
+		//ft_printf("%d ", size);
 		if (size == 0 || (size > 10 && argv[i][0] != '-') || size > 11)
 			return (0);
 		if (argv[i][0] != '-' && size == 10 && ft_strncmp(argv[i], "2147483647", 10) > 0)
 			return (0);
 		if (argv[i][0] == '-' && size == 11 && ft_strncmp(argv[i], "-2147483648", 11) > 0)
 			return (0);
-			
 	}
 	return (check_repeated(argc, argv));
 }

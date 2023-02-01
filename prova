@@ -1,0 +1,8 @@
+ARG=$(ruby -e "puts (00..99).to_a.shuffle.join(' ')"); 
+S=$(./push_swap $ARG | ./checker_OS $ARG)
+if [ $S == "OK" ]; then
+	printf " .[OK]";
+	control=2
+else
+	printf ".[KO]"
+fi

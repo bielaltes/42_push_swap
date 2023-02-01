@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:49:31 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/31 12:50:59 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/01 11:00:18 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,37 @@ int	max_stack(t_stack *stack)
 	return (max);
 }
 
+int	*max3_stack(t_stack *stack)
+{
+	t_node *aux;
+	int	*max;
+	int first;
+
+	first = 1;
+	max = malloc(sizeof(int) * 3);
+	max[0] = -2147483648; 
+	aux = stack->top;
+	while (aux != stack->top || first)
+	{
+		first = 0;
+		if (aux->content > max[0])
+		{
+			max[2] = max[1];
+			max[1] = max[0];
+			max[0] = aux->content;
+		}
+		else if (aux->content > max[1])
+		{
+			max[2] = max[1];
+			max[1] = aux->content;
+		}
+		else if (aux->content > max[0])
+			max[2] = aux->content;
+		aux = aux->ant;
+	}
+	return (max);
+}
+
 int	sorted(t_stack *a, int n)
 {
 	int		i;
@@ -131,11 +162,13 @@ void print_stack(t_stack *stack)
 	t_node *aux;
 
 	aux = stack->top;
+	ft_printf("stack %c:", stack->name);
 	while (aux != stack->bot && aux)
 	{
 		ft_printf("%d ", aux->content);
 		aux = aux->ant;
 	}
 	if (aux)
-		ft_printf("%d\n", aux->content);
+		ft_printf("%d", aux->content);
+	write(1, "\n", 1);
 }
