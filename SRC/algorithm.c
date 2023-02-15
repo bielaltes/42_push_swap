@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 10:07:36 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/02/01 12:00:41 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:35:28 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,53 +27,6 @@ void	fill_array(int *numbers, t_stack *a)
 		++i;
 	}
 	numbers[i] = aux->content;
-}
-
-void	sort_array(int *numbers, int n)
-{
-	int i;
-	int j;
-	int a;
-
-	i = 0;
-	while (i < n)
-	{
-		j = 0;
-		while (j < n)
-		{
-			if (numbers[i] > numbers[j]) 
-			{
-				a =  numbers[i];
-				numbers[i] = numbers[j];
-				numbers[j] = a;
-			}
-			j++;
-		}
-		++i;
-	}
-}
-
-int	*compute_delimiters(t_stack *a, int chunk)
-{
-	int	*numbers;
-	int	*delimiters;
-	int	i;
-
-	numbers = malloc(sizeof(int) * (a->size + 1));
-	numbers[a->size] = -1;
-	delimiters = malloc(sizeof(int)  * (a->size / chunk + 2));
-	delimiters[a->size / chunk + 1] = -1;
-	fill_array(numbers, a);
-	sort_array(numbers, a->size);
-	i = 0;
-	while (i < (a->size / chunk))
-	{
-		delimiters[i] = numbers[i * chunk];
-		++i;
-	}
-	delimiters[i] = numbers[a->size-1];
-	free(numbers);
-	return (delimiters);
 }
 
 int	smart_rot(t_stack *a, int min, int max)
@@ -111,58 +64,136 @@ int	smart_rot(t_stack *a, int min, int max)
 	return (RA);
 }
 
-void	send_b(t_stack *a, t_stack *b, int max, int min)
+void	sort_array(int *numbers, int n)
+{
+	int i;
+	int j;
+	int a;
+
+	i = 0;
+	while (i < n)
+	{
+		j = 0;
+		while (j < n)
+		{
+			if (numbers[i] > numbers[j]) 
+			{
+				a =  numbers[i];
+				numbers[i] = numbers[j];
+				numbers[j] = a;
+			}
+			j++;
+		}
+		++i;
+	}
+}
+
+static void	fill_indx(t_stack *a, int *indx)
+{
+	fill_array(indx, a);
+	sort_array(indx, a->size);
+}
+
+/*static int get_indx(int num, int *indx)
+{
+	int i = 0;
+	while (i >= 0)
+	{
+		if (indx[i] == num)
+			return (i);
+		++i;
+	}
+	return (0);
+}*/
+
+
+/*static void	smart_rot_ind(t_stack *a, int n, int *indx)
+{
+	int rot;
+
+	rot = smart_rot(a, indx[n], indx[n]);
+	if (rot == RA)
+	{
+		while ((a->top->content != indx[n]))
+		{
+			rotate(a);
+		}
+	}
+	else if (rot == RRA)
+	{
+		while ((a->top->content != indx[n]))
+		{
+			revrotate(a);
+		}
+	}
+}*/
+
+static void send_b(t_stack *a, t_stack *b, int *indx, int i, int size)
 {
 	int end;
-	//ft_printf("%d %d\n", min, max);
+	int	max;
+	int	min;
+
+	max = indx[(i -1) * size];
+	min = indx[i * size];
+	if (b->size == 0)
+		min = indx[a->size -1];
 	end = 1;
 	while (end)
 	{
 		end = smart_rot(a, min, max);
-		//print_stack(a);
-		//print_stack(b);
-		//ft_printf("%d\n", end);
 		if (end == RA)
 		{
 			while (!(a->top->content <= max && a->top->content >= min))
 			{
 				rotate(a);
 			}
+			//ft_printf("%d;%d;%d\n", a->top->content, indx[(i-1) * size + (size / 2)], size);
 			push(b, a);
+			if (b->top->content > indx[i * size - (size / 2)])
+				rotate(b);
+			
 		}
 		else if (end == RRA)
 		{
-			//ft_printf(" soc el top: %d %d, %d\n", a->top->content, min, max);
 			while (!(a->top->content <= max && a->top->content >= min))
 			{
 				revrotate(a);
 			}
+			//ft_printf("%d;%d;%d\n", a->top->content, indx[i * size + (size / 2)], size);
 			push(b, a);
+			if (b->top->content > indx[i * size - (size / 2)])
+				rotate(b);
+			
+			
 		}
 	}
 }
 
-static int	in_3(int n, int *max)
+static int	in_4(int n, int *max)
 {
 	if (n == max[0])
 		return (1);
 	if (n == max[1])
 		return (1);
-	//if (n == max[2])
-		//return (1);
+	if (n == max[2])
+		return (1);
+	if (n == max[3])
+		return (1);
 	return (0);
 }
 
-void get_back(t_stack *a, t_stack *b)
+static void	get_back(t_stack *a, t_stack *b, int *indx, int i, int size)
 {
-	int rot;
 	int	*max;
-
+	int	rot;
+	
+	size = 0;
+	indx[0] = i;
+	//if (i != 0)
+		//smart_rot_ind(a, i*size -1, indx);
 	while (b->size != 0)
 	{
-		//print_stack(a);
-		//print_stack(b);
-		//ft_printf("\n");
 		if (b->size <= 2)
 		{
 			while (b->size != 0)
@@ -171,42 +202,55 @@ void get_back(t_stack *a, t_stack *b)
 		}
 		else
 		{
-			max = max3_stack(b);
-			//ft_printf("max:%d %d", max[2], max[0]);
-			while ((rot = smart_rot(b, max[1], max[0])) != 0)
+			max = max4_stack(b);
+			while ((rot = smart_rot(b, max[2], max[0])) != 0)
 			{
 				if (rot == RA)
 				{
-					while (!in_3(b->top->content, max))
+					while (!in_4(b->top->content, max))
 					{
 						rotate(b);
 					}
 					push(a, b);
+					if (a->size >1 && a->top->content == max[0] && a->top->ant->content == max[1])
+						swap(a);
+					if (a->top->content <= max[2] && smart_rot(b, max[1], max[0]) != 0)
+						rotate(a);
 				}
 				else if (rot == RRA)
 				{
-					while (!in_3(b->top->content, max))
+					while (!in_4(b->top->content, max))
 					{
 						revrotate(b);
 					}
 					push(a, b);
+					if (a->size >1 && a->top->content == max[0] && a->top->ant->content == max[1])
+						swap(a);
+					if (a->top->content <= max[2] && smart_rot(b, max[1], max[0]) != 0)
+						rotate(a);
 				}
 			}
+			sort4_esp(a, max);
 			free(max);
-			sort2(a);
 		}
 	}
 }
 
 
+int	cp(int size)
+{
+	if (size <= 100)
+		return (size / 3);
+	else return (size / 6);
+}
 
 void	sort(t_stack *a, t_stack *b)
 {
+	int *indx;
 	int	chunk_size;
+	int	chunks;
 	int i;
-	int *delimiters;
-	int number_chunks;
-
+	
 	if (a->size == 2)
 		return (sort2(a));
 	else if (a->size == 3)
@@ -215,20 +259,24 @@ void	sort(t_stack *a, t_stack *b)
 		return (sort4(a, b));
 	else if (a->size == 5)
 		return (sort5(a, b));
-	chunk_size = a->size * 0.015 + 3.5;
-	if (chunk_size < 4)
-		chunk_size = 2;
-	number_chunks = a->size / chunk_size + 1;
-	i = 0;
-	delimiters = compute_delimiters(a, chunk_size);
-	//for (int k = 0; delimiters[k] != -1; ++k)
-		//ft_printf("%d ", delimiters[k]);
-	//write(1, "\n", 1);
-	while (i < number_chunks)
+	indx = malloc(sizeof(int) * a->size);
+	fill_indx(a, indx);
+	chunk_size = cp(a->size);
+	if (chunk_size < 5)
+		chunk_size = 3;
+	chunks = a->size / chunk_size;
+	i = chunks;
+	//for (int i = 0; i < a->size; ++i)
+		//ft_printf("%d\n", indx[i]);
+	//send_b(a, b, indx, i *chunk_size, a->size);
+	while (i > 0)
 	{
-		send_b(a, b,delimiters[i], delimiters[i+1]);
-		++i;
+		send_b(a, b, indx, i, chunk_size);
+		//get_back(a, b, indx, i, chunk_size);
+		--i;
 	}
-	while (b->size != 0)
-		get_back(a, b);
+	get_back(a, b, indx, i, chunk_size);
+	//smart_rot_ind(a,0,indx);
+	//rotate(a);
+	free(indx);
 }

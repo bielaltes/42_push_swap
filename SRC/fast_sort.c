@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 13:27:52 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/02/01 12:00:09 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:21:09 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,14 @@ void	sort4(t_stack *a, t_stack *b)
 	}
 	sort3(a);
 	push(a, b);
+}
+
+void	sort4_esp(t_stack *a, int *max)
+{
+	sort2(a);
+	while (a->bot->content == max[3] || a->bot->content == max[2])
+		revrotate(a);
+	sort2(a);
 }
 
 void	sort5(t_stack *a, t_stack *b)
