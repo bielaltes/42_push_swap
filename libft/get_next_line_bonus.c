@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 13:29:16 by baltes-g          #+#    #+#             */
-/*   Updated: 2022/12/14 16:11:39 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:09:11 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*read_from_file(int fd, char *accumulative)
 	if (!buffer)
 		return (clean(accumulative));
 	aux = BUFFER_SIZE;
-	while (aux == BUFFER_SIZE && ft_strchr(accumulative, '\n') == NULL)
+	while (aux == BUFFER_SIZE && (!accumulative || ft_strchr(accumulative, '\n') == NULL))
 	{
 		aux = read(fd, buffer, BUFFER_SIZE);
 		if (aux == -1)

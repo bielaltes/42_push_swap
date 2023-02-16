@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:48:13 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/02/01 11:30:49 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:49:00 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int	check_repeated(int argc, char **argv)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 1;
 	while (i < argc)
@@ -35,8 +35,9 @@ static int	check_repeated(int argc, char **argv)
 
 static int	check_numbers(char *str)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (str[i] != '\0')
 	{
 		if (!ft_isdigit(str[i]) && (i != 0 || str[i] != '-'))
@@ -50,16 +51,22 @@ static int	check_numbers(char *str)
 
 int	parse(int argc, char **argv)
 {
-	for (int i = 1;  i < argc; ++i)
+	int	i;
+	int	size;
+
+	i = 1;
+	while (i < argc)
 	{
-		int size = check_numbers(argv[i]);
-		//ft_printf("%d ", size);
+		size = check_numbers(argv[i]);
 		if (size == 0 || (size > 10 && argv[i][0] != '-') || size > 11)
 			return (0);
-		if (argv[i][0] != '-' && size == 10 && ft_strncmp(argv[i], "2147483647", 10) > 0)
+		if (argv[i][0] != '-' && size == 10 &&
+			ft_strncmp(argv[i], "2147483647", 10) > 0)
 			return (0);
-		if (argv[i][0] == '-' && size == 11 && ft_strncmp(argv[i], "-2147483648", 11) > 0)
+		if (argv[i][0] == '-' && size == 11 &&
+			ft_strncmp(argv[i], "-2147483648", 11) > 0)
 			return (0);
+		++i;
 	}
 	return (check_repeated(argc, argv));
 }

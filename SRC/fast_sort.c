@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 13:27:52 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/02/15 15:21:09 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:45:20 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void	sort2(t_stack *a)
 			swap(a);
 	}
 }
+
 void	sort3(t_stack *a)
 {
-	int *n;
+	int	*n;
 
 	n = malloc(sizeof(int) * (a->size + 1));
 	fill_array(n, a);

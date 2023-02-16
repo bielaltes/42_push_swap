@@ -6,12 +6,12 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:43:27 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/02/15 17:33:32 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:17:49 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INC/push_swap.h"
-#include "../libft/libft.h"
+#include "../INC/checker.h"
+#include "../../libft/libft.h"
 
 static int equal(char *s1, char *s2)
 {
@@ -22,40 +22,40 @@ static int equal(char *s1, char *s2)
 
 static int	correct(char *cmd)
 {
-	if (equal(cmd, "sa") || equal(cmd, "sb") || equal(cmd, "ss"))
+	if (equal(cmd, "sa\n") || equal(cmd, "sb\n") || equal(cmd, "ss\n"))
 		return (1);
-	else if (equal(cmd, "ra") || equal(cmd, "rb") || equal(cmd, "rr"))
+	else if (equal(cmd, "ra\n") || equal(cmd, "rb\n") || equal(cmd, "rr\n"))
 		return (1);
-	else if (equal(cmd, "rra") || equal(cmd, "rrb") || equal(cmd, "rrr"))
+	else if (equal(cmd, "rra\n") || equal(cmd, "rrb\n") || equal(cmd, "rrr\n"))
 		return (1);
-	else if (equal(cmd, "pa") || equal(cmd, "pb"))
+	else if (equal(cmd, "pa\n") || equal(cmd, "pb\n"))
 		return (1);
 	return (0);
 }
 
 static void exec(char *cmd, t_stack *a, t_stack *b)
 {
-	if (equal(cmd, "sa"))
+	if (equal(cmd, "sa\n"))
 		swap(a);
-	else if (equal(cmd, "sb"))
+	else if (equal(cmd, "sb\n"))
 		swap(b);
-	else if (equal(cmd, "ss"))
+	else if (equal(cmd, "ss\n"))
 		sswap(a, b);
-	else if (equal(cmd, "pa"))
+	else if (equal(cmd, "pa\n"))
 		push(a, b);
-	else if (equal(cmd, "pb"))
+	else if (equal(cmd, "pb\n"))
 		push(b, a);
-	else if (equal(cmd, "ra"))
+	else if (equal(cmd, "ra\n"))
 		rotate(a);
-	else if (equal(cmd, "rb"))
+	else if (equal(cmd, "rb\n"))
 		rotate(a);
-	else if (equal(cmd, "rr"))
+	else if (equal(cmd, "rr\n"))
 		rrotate(a, b);
-	else if (equal(cmd, "rra"))
+	else if (equal(cmd, "rra\n"))
 		revrotate(a);
-	else if (equal(cmd, "rrb"))
+	else if (equal(cmd, "rrb\n"))
 		revrotate(a);
-	else if (equal(cmd, "rrr"))
+	else if (equal(cmd, "rrr\n"))
 		revvrrotate(a, b);
 }
 
@@ -64,10 +64,14 @@ static void exec_commands(t_stack *a, t_stack *b)
 	char	*cmd;
 
 	cmd = get_next_line(0);
+	ft_printf("%s\n", cmd);
 	while (cmd)
 	{
 		if (!correct(cmd))
-			write(1, "Error\n", 3);
+		{
+			write(2, "Error\n", 6);
+			exit(2);
+		}
 		else
 			exec(cmd, a, b);
 		free(cmd);
@@ -83,7 +87,7 @@ int	main(int argc, char **argv)
 
 	aux = &a;
 	if (!parse(argc, argv) || argc == 1)
-		write(1, "KO\n", 3);
+		write(2, "Error\n", 6);
 	else
 	{
 		init_stack(&a, 'a');

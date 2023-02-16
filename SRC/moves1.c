@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 17:03:42 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/01/31 12:14:55 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:46:46 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	swap(t_stack *s)
 {
-	int aux;
+	int	aux;
 
 	if (s->size >= 2)
 	{
@@ -34,7 +34,7 @@ void	sswap(t_stack *s1, t_stack *s2)
 
 void	push(t_stack *s1, t_stack *s2)
 {
-	int aux;
+	int	aux;
 
 	if (s2->size >= 1)
 	{
@@ -43,36 +43,4 @@ void	push(t_stack *s1, t_stack *s2)
 		push_top(s1, aux);
 	}
 	ft_printf("p%c\n", s1->name);
-}
-
-void	rotate(t_stack *s)
-{
-	if (s->size > 1)
-	{
-		s->top = s->top->ant;
-		s->bot = s->bot->ant;
-	}
-	ft_printf("r%c\n", s->name);
-}
-
-void	rrotate(t_stack *s1, t_stack *s2)
-{
-	rotate(s1);
-	rotate(s2);
-}
-
-void	revrotate(t_stack *s)
-{
-	if (s->size > 1)
-	{
-		s->top = s->top->next;
-		s->bot = s->bot->next;
-	}
-	ft_printf("rr%c\n", s->name);
-}
-
-void	revvrrotate(t_stack *s1, t_stack *s2)
-{
-	revrotate(s1);
-	revrotate(s2);
 }

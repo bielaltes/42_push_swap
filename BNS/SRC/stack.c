@@ -6,12 +6,12 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:49:31 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/02/15 14:45:07 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:21:34 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INC/push_swap.h"
-#include "../libft/libft.h"
+#include "../INC/checker.h"
+#include "../../libft/libft.h"
 
 void	init_stack(t_stack *stack, char name)
 {

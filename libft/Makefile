@@ -6,7 +6,7 @@
 #    By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/16 17:10:25 by baltes-g          #+#    #+#              #
-#    Updated: 2023/01/27 17:41:45 by baltes-g         ###   ########.fr        #
+#    Updated: 2023/02/16 15:56:53 by baltes-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ SRCS =	ft_bzero.c					\
 		ft_printstr_printf.c		\
 		ft_uitoa_printf.c			\
 		ft_printchar_printf.c		\
-		get_next_line_bonus.c	\
+		get_next_line_bonus.c		\
 		get_next_line_utils_bonus.c	
 
 
@@ -76,7 +76,7 @@ RM		=	rm -f
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -g
 
 all:	$(NAME)
  
