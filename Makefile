@@ -1,6 +1,6 @@
 CC=gcc
 NAME=push_swap
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -g
 LIB_DIR=libft/
 LIB=libft.a
 LIB_INC=libft.h
@@ -10,10 +10,12 @@ SRC =	SRC/moves1.c		\
 		SRC/moves2.c		\
 		SRC/parse.c			\
 		SRC/push_swap.c		\
-		SRC/stack1.c			\
-		SRC/stack2.c			\
+		SRC/stack1.c		\
+		SRC/stack2.c		\
 		SRC/algorithm.c		\
-		SRC/fast_sort.c
+		SRC/fast_sort.c		\
+		SRC/array_func.c	\
+		SRC/algorithm_aux.c
 		
 BNS_DIR = BNS/
 BNS_NAME = checker

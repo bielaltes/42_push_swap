@@ -6,18 +6,18 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:43:27 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/02/16 16:17:49 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:58:53 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INC/checker.h"
 #include "../../libft/libft.h"
 
-static int equal(char *s1, char *s2)
+static int	equal(char *s1, char *s2)
 {
 	if (ft_strlen(s1) != ft_strlen(s2))
 		return (0);
-	return (ft_strncmp(s1, s2, ft_strlen(s1)));
+	return (ft_strncmp(s1, s2, ft_strlen(s1)) == 0);
 }
 
 static int	correct(char *cmd)
@@ -33,7 +33,7 @@ static int	correct(char *cmd)
 	return (0);
 }
 
-static void exec(char *cmd, t_stack *a, t_stack *b)
+static void	exec(char *cmd, t_stack *a, t_stack *b)
 {
 	if (equal(cmd, "sa\n"))
 		swap(a);
@@ -48,24 +48,23 @@ static void exec(char *cmd, t_stack *a, t_stack *b)
 	else if (equal(cmd, "ra\n"))
 		rotate(a);
 	else if (equal(cmd, "rb\n"))
-		rotate(a);
+		rotate(b);
 	else if (equal(cmd, "rr\n"))
 		rrotate(a, b);
 	else if (equal(cmd, "rra\n"))
 		revrotate(a);
 	else if (equal(cmd, "rrb\n"))
-		revrotate(a);
+		revrotate(b);
 	else if (equal(cmd, "rrr\n"))
 		revvrrotate(a, b);
 }
 
-static void exec_commands(t_stack *a, t_stack *b)
+static void	exec_commands(t_stack *a, t_stack *b)
 {
 	char	*cmd;
 
 	cmd = get_next_line(0);
-	ft_printf("%s\n", cmd);
-	while (cmd)
+	while (cmd != NULL)
 	{
 		if (!correct(cmd))
 		{
@@ -81,9 +80,10 @@ static void exec_commands(t_stack *a, t_stack *b)
 
 int	main(int argc, char **argv)
 {
-	t_stack a;
-	t_stack b;
+	t_stack	a;
+	t_stack	b;
 	t_stack	*aux;
+	int		i;
 
 	aux = &a;
 	if (!parse(argc, argv) || argc == 1)
@@ -92,8 +92,12 @@ int	main(int argc, char **argv)
 	{
 		init_stack(&a, 'a');
 		init_stack(&b, 'b');
-		for (int i = argc-1; i > 0; --i)
+		i = argc -1;
+		while (i > 0)
+		{
 			push_top(&a, atoi(argv[i]));
+			--i;
+		}
 		exec_commands(&a, &b);
 		if (sorted(&a, aux->size))
 			write(1, "OK\n", 3);

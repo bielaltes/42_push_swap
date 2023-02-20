@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 13:29:16 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/02/16 16:09:11 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:49:13 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ char	*read_from_file(int fd, char *accumulative)
 	if (!buffer)
 		return (clean(accumulative));
 	aux = BUFFER_SIZE;
-	while (aux == BUFFER_SIZE && (!accumulative || ft_strchr(accumulative, '\n') == NULL))
+	while (aux == BUFFER_SIZE && (!accumulative
+			|| ft_strchr_gnl(accumulative, '\n') == NULL))
 	{
 		aux = read(fd, buffer, BUFFER_SIZE);
 		if (aux == -1)
@@ -37,7 +38,7 @@ char	*read_from_file(int fd, char *accumulative)
 		}
 		buffer[aux] = '\0';
 		if (aux != 0)
-			accumulative = ft_strjoin(accumulative, buffer);
+			accumulative = ft_strjoin_gnl(accumulative, buffer);
 		if (!accumulative)
 			aux = 0;
 	}
@@ -49,7 +50,7 @@ char	*next_acc(char *accumulative)
 {
 	char	*aux;
 
-	aux = ft_strchr(accumulative, '\n');
+	aux = ft_strchr_gnl(accumulative, '\n');
 	if (aux != NULL && *aux == '\n')
 	{
 		++aux;
@@ -85,7 +86,7 @@ char	*read_from_acc(char *s1)
 	new[i] = '\0';
 	if (*s1 == '\n')
 	{
-		new = ft_strjoin(new, "\n");
+		new = ft_strjoin_gnl(new, "\n");
 		if (!new)
 			return (NULL);
 		new[i + 1] = '\0';

@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 13:35:57 by baltes-g          #+#    #+#             */
-/*   Updated: 2022/12/14 16:17:22 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:49:33 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_strchr_gnl(char *s, int c)
 	if (!s)
 		return (0);
 	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
+		return ((char *)&s[ft_strlen_gnl(s)]);
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char) c)
@@ -49,7 +49,7 @@ char	*ft_strdup_gnl(char *s1)
 	int		i;
 
 	i = 0;
-	new = malloc(sizeof(char) *(ft_strlen(s1) + 1));
+	new = malloc(sizeof(char) *(ft_strlen_gnl(s1) + 1));
 	if (!new)
 		return (NULL);
 	while (*s1 != '\0')
@@ -80,7 +80,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 			return (NULL);
 		*s1 = '\0';
 	}
-	aux = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
+	aux = malloc(sizeof(char) * ((ft_strlen_gnl(s1) + ft_strlen_gnl(s2)) + 1));
 	if (!aux)
 		return (clean(s1));
 	i = -1;

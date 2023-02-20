@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:12:22 by baltes-g          #+#    #+#             */
-/*   Updated: 2023/02/15 15:20:47 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:58:06 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define RA 1
 # define RRA 2
+
 typedef struct s_node
 {
 	int				content;
@@ -51,7 +52,7 @@ void	pop(t_stack *stack);
 int		min_stack(t_stack *stack);
 int		max_stack(t_stack *stack);
 int		*max4_stack(t_stack *stack);
-void 	print_stack(t_stack *stack);
+void	print_stack(t_stack *stack);
 void	sort(t_stack *a, t_stack *b);
 void	sort2(t_stack *a);
 void	sort3(t_stack *a);
@@ -61,5 +62,8 @@ void	sort5(t_stack *a, t_stack *b);
 void	fill_array(int *n, t_stack*a);
 int		smart_rot(t_stack *a, int min, int max);
 int		sorted(t_stack *a, int n);
+int		in_4(int n, int *max);
+int		*fill_indx(t_stack *a);
+int		smart_rot(t_stack *a, int min, int max);
 
 #endif

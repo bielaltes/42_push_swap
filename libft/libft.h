@@ -6,7 +6,7 @@
 /*   By: baltes-g <baltes-g@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:45:12 by baltes-g          #+#    #+#             */
-/*   Updated: 2022/12/14 16:19:45 by baltes-g         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:50:11 by baltes-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdarg.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 1
 # endif
 
 typedef struct s_list
@@ -96,12 +96,14 @@ char			*ft_strchr_gnl(char *s, int c);
 char			*ft_strjoin_gnl(char *s1, char *s2);
 char			*ft_strrchr_gnl(const char *s, int c);
 size_t			ft_strlen_gnl(const char *str);
-int				ft_htoa_printf(t_flags flags, unsigned int c, int *error, int maj);
+int				ft_htoa_printf(t_flags flags, unsigned int c,
+					int *error, int maj);
 int				ft_itoa_printf(t_flags flags, int c, int *error);
 int				ft_printchar_printf(t_flags flags, int c, int *error);
 int				ft_printf(char const *str, ...);
 int				ft_printstr_printf(t_flags flags, char *str, int *error);
-int				ft_ptoa_printf(t_flags flags, unsigned long long int c, int *error);
+int				ft_ptoa_printf(t_flags flags,
+					unsigned long long int c, int *error);
 int				ft_uitoa_printf(t_flags flags, unsigned int c, int *error);
 
 #endif

@@ -7,8 +7,10 @@ LIB_INC=libft.h
 INC = INC/push_swap.h
 
 SRC =	SRC/moves1.c		\
+		SRC/moves2.c		\
 		SRC/checker.c		\
-		SRC/stack.c			\
+		SRC/stack1.c		\
+		SRC/stack2.c		\
 		SRC/parse.c
 		
 
